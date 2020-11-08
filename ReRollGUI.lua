@@ -89,7 +89,7 @@ function HoradricPlaceItem(self)
 			--print(self:GetName().." Set to "..info2.." from "..self.orgbagbutton:GetName() )
 			print(".#RERC "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
 			AddonCommSendPacketToServer("RERC", " "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
-			moneyText:SetText("Cost: "..GetCoinTextureString(sellPrice))
+			moneyText:SetText("Cost: "..GetCoinTextureString(sellPrice)) --place holder untill reroll cost reply
 			ItemNamePlace:SetText(itemName)
 		end		
 	ClearCursor()	
