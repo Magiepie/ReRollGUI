@@ -1,0 +1,11 @@
+## Interface: 30300
+## Title: ReRollGUI
+## Author: Tooze
+## Notes: GUI for rerolling stats on ShadowCraft
+## Server:  http://shadowcraft.servegame.com/
+## Discord: https://discord.gg/VdY6QR4
+
+## AddonComm.lua by Tudi
+
+AddonComm.lua
+ReRollGUI.lua
