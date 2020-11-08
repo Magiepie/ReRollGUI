@@ -94,7 +94,7 @@ function HoradricPlaceItem(self)
 			--print(self:GetName().." Set to "..info2.." from "..self.orgbagbutton:GetName() )
 			print(".#RERC "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
 			AddonCommSendPacketToServer("RERC", " "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
-			UpdatePlaceHolderText(itemName,sellPrice)
+			UpdatePlaceHolderText(link,sellPrice)
 		end		
 	ClearCursor()	
 	HoradricButton_OnUpdate()
