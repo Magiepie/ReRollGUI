@@ -76,7 +76,7 @@ function OnServerQueryReply(message)
 end
 RegisterOpcodeHandler("RERR",OnServerQueryReply)
 
-function UpdatePlaceHolderText(itemNane,price)
+function UpdatePlaceHolderText(itemName,price)
 		moneyText:SetText("Cost: "..GetCoinTextureString(price)) --place holder untill reroll cost reply
 	ItemNamePlace:SetText(itemName)
 end
@@ -94,7 +94,7 @@ function HoradricPlaceItem(self)
 			--print(self:GetName().." Set to "..info2.." from "..self.orgbagbutton:GetName() )
 			print(".#RERC "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
 			AddonCommSendPacketToServer("RERC", " "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
-			UpdatePlaceHolderText(itemNane,sellPrice)
+			UpdatePlaceHolderText(itemName,sellPrice)
 		end		
 	ClearCursor()	
 	HoradricButton_OnUpdate()
@@ -121,6 +121,7 @@ local button
 		 HoradricRemoveItem(button)
 	   end
 	end  
+	UpdatePlaceHolderText( " ",0 )
 	HoradricButton_OnUpdate()
 end
 
@@ -232,7 +233,7 @@ local index =2
 	print(".#RERA "..RIC)
 	AddonCommSendPacketToServer("RERA", " "..RIC)
 	ResetHoradricButtons()
-	UpdatePlaceHolderText( " ",0 )
+	
 end
 
  function HoradricCombine_OnClick(self, button)
