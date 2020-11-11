@@ -115,6 +115,7 @@ function dump(o)
 end
 
 function GetStatsCount(itemLink)
+	--Do the I dont wana regex line count between dps/armor and durabiality from tooltip.
 	return 2
 end
 
@@ -157,6 +158,7 @@ function HoradricRemoveItem(self)
 	SetItemButtonTexture(self,self.icon)	
 	HoradricButton_OnUpdate()
 	GameTooltip:Hide()
+	UpdatePlaceHolderText("",0)
 end 
 
 function ResetHoradricButtons()
