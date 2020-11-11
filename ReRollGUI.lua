@@ -122,7 +122,6 @@ function GetItemReRollCost(itemLink)
 local itemName, link, iRar, itemLevel, itemMinLevel, _, _,_, _, textureName,sellPrice = GetItemInfo(itemLink);
 local  itemMinLevel = itemMinLevel + 10	-- fix for 1000 money off?
 local cost = itemMinLevel*100
-print(cost)
 	if 	   iRar == 3 then 
 		cost = cost+5000
 	elseif iRar == 4 then
