@@ -74,7 +74,7 @@ end--]]
 function OnServerQueryReply(message)
 	moneyText:SetText("Cost: "..GetCoinTextureString(message))
 end
-RegisterOpcodeHandler("RERR",OnServerQueryReply)
+--RegisterOpcodeHandler("RERR",OnServerQueryReply)
 
 function UpdatePlaceHolderText(itemName,price)
 		moneyText:SetText("Cost: "..GetCoinTextureString(price)) --place holder untill reroll cost reply
@@ -83,7 +83,7 @@ end
 
 function HoradricPlaceItem(self)
 	local infoType, info1, info2 = GetCursorInfo()
-	local itemName, link, _, _, _, _, _,_, _, textureName,sellPrice = GetItemInfo(info1);			
+	local itemName, link, irar, _, _, _, _,_, _, textureName,sellPrice = GetItemInfo(info1);			
 		if (infoType == "item") then	
 			self.icon = textureName
 			self.itemid = info1
@@ -92,15 +92,44 @@ function HoradricPlaceItem(self)
 			self.locked = true
 				if self.orgbagbutton == nil then HoradricRemoveItem(self);ClearCursor()	; return end -- equipt item to heradric cancle
 			--print(self:GetName().." Set to "..info2.." from "..self.orgbagbutton:GetName() )
-			print(".#RERC "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
-			AddonCommSendPacketToServer("RERC", " "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
-			UpdatePlaceHolderText(link,sellPrice)
+			
+			--AddonCommSendPacketToServer("RERC", " "..self.orgbagbutton:GetParent():GetID() .." ".. self.orgbagbutton:GetID()-1)
+			UpdatePlaceHolderText(link,GetItemReRollCost(info1))
 		end		
 	ClearCursor()	
 	HoradricButton_OnUpdate()
 	HoradricButton_OnEnter(self)--instant tooltipshow
 end
 
+function GetItemReRollCost(info1)
+local itemName, link, iRar, itemLevel, itemMinLevel, _, _,_, _, textureName,sellPrice = GetItemInfo(info1);	
+local cost = itemMinLevel*100
+	if 	   irar == 3 then 
+		cost = cost+5000
+	elseif irar == 4 then
+		cost = cost+45000
+	end
+	if (itemLevel <= 30)>             
+		 cost = cost + 1000	 
+	 elseif (itemLevel <= 60) 
+		 cost = cost + 5000
+	 elseif (itemLevel <= 100) 
+		 cost = cost + 10000
+	 elseif (itemLevel <= 200) 
+		 cost = cost + 50000
+	 elseif (itemLevel <= 400) 
+		 cost = cost +500000
+	 elseif (itemLevel <= 1000) 
+		 cost = cost + 1000000
+	 end
+	 
+	 --cost += item->StatsCount * 1000;
+ local StatsCount = 0 -- total number of stats on item?
+ local StatsCountX1000 = StatsCount * 1000
+	cost = cost + StatsCountX1000 
+	
+ return cost
+end
 function HoradricRemoveItem(self)
 	if self.orgbagbutton ~= nil then ContainerFrame_Update(self.orgbagbutton:GetParent()) end		
 	self.icon = nil
