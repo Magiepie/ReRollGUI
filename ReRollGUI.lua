@@ -156,7 +156,6 @@ function HoradricRemoveItem(self)
 	self.orgbagbutton = nil
 	self.locked = false
 	SetItemButtonTexture(self,self.icon)	
-	HoradricButton_OnUpdate()
 	GameTooltip:Hide()
 	UpdatePlaceHolderText("",0)
 end 
@@ -200,7 +199,6 @@ function GetInUseHoradricSlot()
 end
 
 function HoradricButton_OnClick(self, button)
-	--print(self:GetName().." "..button)
 	if button == "RightButton" then
 		HoradricRemoveItem(self)
 		HoradricButton_OnUpdate()
@@ -212,7 +210,6 @@ function HoradricButton_OnClick(self, button)
 		else		
 			if self.hasItem then
 				local bag,slot = self.orgbagbutton:GetParent():GetID(),self.orgbagbutton:GetID()
-				--print("Picking up Horadric item from "..self.orgbagbutton:GetName())
 				PickupContainerItem(bag,slot)
 				HoradricRemoveItem(self)				
 			end
@@ -245,7 +242,6 @@ function HoradricButton_OnLeave(self)
   
 end
 
--- .#RIC A b1 s1 b2 s2 b3 
 function HoradricCombineAccept()
 --[[local bag={}
 local slot={}
@@ -278,10 +274,8 @@ local index =2
 				bag[9].." "..slot[9];]]--
 	local itemid, textureName, locked ,hasItem ,orgbagbutton = GetHoradricInfo(1)
 	local RIC = orgbagbutton:GetParent():GetID() .." ".. orgbagbutton:GetID()-1
-	print(".#RERA "..RIC)
-	AddonCommSendPacketToServer("RERA", " "..RIC)
-	ResetHoradricButtons()
-	
+	--AddonCommSendPacketToServer("RERA", " "..RIC)
+	ResetHoradricButtons()	
 end
 
  function HoradricCombine_OnClick(self, button)
