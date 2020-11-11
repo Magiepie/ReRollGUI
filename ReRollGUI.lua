@@ -336,21 +336,22 @@ local function ClickToHoradricWAR(self, button)
 end
 Horadric:Hide()
 
---[[ --not useable causes forbidden action error on item use.
+
 if Horadric:IsVisible() then 
 hooksecurefunc("ContainerFrameItemButton_OnClick", function(self, button) ClickToHoradricWAR(self, button) end)
 else
-local origContainerFrameItemButton_OnClick= ContainerFrameItemButton_OnClick; -- Right clicking items in to Horadric Frame
-	ContainerFrameItemButton_OnClick = function(self, button)			  	  -- unable to eat/drink/use items. protected action.
+local origContainerFrameItemButton_OnClick= ContainerFrameItemButton_OnClick; 
+	ContainerFrameItemButton_OnClick = function(self, button)			  	 
 	if Horadric:IsShown() then
+	ResetHoradricButtons()
 		if ( button == "RightButton" ) then	
 			local bag,slot = self:GetParent():GetID(),self:GetID()
-			local button = _G["HoradricButton"..GetInUseHoradricSlot()]
-				PickupContainerItem(bag,slot)
+			local button = _G["HoradricButton"..GetInUseHoradricSlot()]				
+				PickupContainerItem(bag,slot)				
 				HoradricButton_OnClick(button, "LeftButton")
 			return		
 		end
 	end
    return origContainerFrameItemButton_OnClick(self, button)
 end
-end]]--
+end
